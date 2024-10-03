@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="newsdata">
+    <button type="button" id="clicks">Click Me</button>
+    <!-- news1 -->
+    <h1>Author <span id="a"></span></h1>
+    <h2>Title <span id="b"></span></h2>
+    <h4>Description <span id="c"></span></h4>
+    <img alt="" id="d">
+    <!-- news2 -->
+    <h1>Author <span id="e"></span></h1>
+    <h2>Title <span id="f"></span></h2>
+    <h4>Description <span id="g"></span></h4>
+    <img alt="" id="h">
+    <!-- news3 -->
+    <h1>Author <span id="i"></span></h1>
+    <h2>Title <span id="j"></span></h2>
+    <h4>Description <span id="k"></span></h4>
+    <img alt="" id="l">
+    <script>
+        document.getElementById("clicks").addEventListener("click", function () {
+            var news = document.getElementById("newsdata").value;
+            fetch("https://newsapi.org/v2/top-headlines?sources=" + news + "-news&apiKey=b54bbd733a8849419ba1fb0c53c5fcdd")
+                .then(response => response.json())
+                .then(data => {
+                    // news1
+                    document.getElementById("a").innerHTML = data.articles[0].author;
+                    document.getElementById("b").innerHTML = data.articles[0].title;
+                    document.getElementById("c").innerHTML = data.articles[0].description;
+                    document.getElementById("d").src = data.articles[0].urlToImage;
+                    // news2
+                    document.getElementById("e").innerHTML = data.articles[1].author;
+                    document.getElementById("f").innerHTML = data.articles[1].title;
+                    document.getElementById("g").innerHTML = data.articles[1].description;
+                    document.getElementById("h").src = data.articles[1].urlToImage;
+                    //news3
+                    document.getElementById("i").innerHTML = data.articles[2].author;
+                    document.getElementById("j").innerHTML = data.articles[2].title;
+                    document.getElementById("k").innerHTML = data.articles[2].description;
+                    document.getElementById("l").src = data.articles[2].urlToImage;
+                })
+        })
+    </script>
+</body>
+
+</html>
